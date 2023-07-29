@@ -1,16 +1,18 @@
-FROM node:latest as builder
+FROM node:latest as node
 
-RUN mkdir -p /app
+#create root folder
+RUN mkdir -p /frontend
+# access the root folder
+WORKDIR /frontend
 
-WORKDIR /app
-
-COPY . .
-
+#install dependencies
+COPY . /frontend/
 RUN npm install
-RUN npm run build --prod
 
-CMD ["npm", "start"]
+#build application
+RUN npm run build
 
+#curl nginx
 FROM nginx:alpine
 
-COPY --from=builder app/dist/angular12-crud-application-demo usr/share/nginx/html
+COPY --from=node /frontend/dist/sakai-ng /usr/share/nginx/html
