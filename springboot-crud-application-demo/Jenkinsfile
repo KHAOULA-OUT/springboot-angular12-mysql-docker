@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                dir('springboot-crud-application-demo') {
+                    sh 'docker build -t khaoulaout/my-back-app:jma-2.0 .'
+                }
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    sh "echo $PASS | docker login -u $USER --password-stdin"
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                sh 'docker push khaoulaout/my-back-app:jma-2.0'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'docker run -p 80:80 -d khaoulaout/my-back-app:jma-2.0'
+            }
+        }
+    }
+}
