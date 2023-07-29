@@ -1,4 +1,4 @@
-FROM node:14.15.0 as node
+FROM node:12.14.1 as node
 
 #create root folder
 RUN mkdir -p /frontend
