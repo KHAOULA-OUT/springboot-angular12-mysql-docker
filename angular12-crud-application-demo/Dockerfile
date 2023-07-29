@@ -15,4 +15,4 @@ RUN npm run build
 #curl nginx
 FROM nginx:alpine
 
-COPY --from=node /frontend/dist/sakai-ng /usr/share/nginx/html
+COPY --from=node /frontend/dist/angular12-crud-application-demo /usr/share/nginx/html
