@@ -1,7 +1,4 @@
-# Use a Maven builder image to build the Spring Boot application
-# Use the base image with JDK (you can choose a different version if needed)
-FROM adoptopenjdk:11-jdk-hotspot
-
+FROM maven:3.8.4-openjdk-8-slim AS builder
 # Set the working directory inside the container
 WORKDIR /app
 
