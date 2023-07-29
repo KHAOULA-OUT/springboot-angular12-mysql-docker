@@ -9,14 +9,7 @@ WORKDIR /frontend
 COPY . /frontend/
 
 # Install Angular CLI
-RUN npm install -g @angular/cli
-
-# Install dependencies
-COPY package.json package-lock.json /frontend/
-RUN npm install
-
-# Copy the entire application
-COPY . /frontend/
+RUN npm install 
 
 # Build the application
 RUN ng build
