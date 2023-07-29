@@ -7,12 +7,22 @@ WORKDIR /frontend
 
 #install dependencies
 COPY . /frontend/
-RUN npm install -g npm@7.5.6
 
-#build application
-RUN npm run build
+# Install Angular CLI
+RUN npm install -g @angular/cli
 
-#curl nginx
+# Install dependencies
+COPY package.json package-lock.json /frontend/
+RUN npm install
+
+# Copy the entire application
+COPY . /frontend/
+
+# Build the application
+RUN ng build
+
+# Stage 2: Set up Nginx to serve the built application
 FROM nginx:alpine
 
+# Copy the built application from the previous stage
 COPY --from=node /frontend/dist/angular12-crud-application-demo /usr/share/nginx/html
