@@ -12,7 +12,7 @@ RUN mvn dependency:go-offline
 COPY . .
 
 # Build the application
-RUN mvn package
+RUN Mvn clean package
 
 # Set the entrypoint to run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "crudapplication-0.0.1-SNAPSHOT.jar"]
