@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        nodejs "NodeJS 20.5.0" // Replace with the name of the NodeJS installation you created in Jenkins
+    }
+
     stages {
         stage('Build') {
             steps {
