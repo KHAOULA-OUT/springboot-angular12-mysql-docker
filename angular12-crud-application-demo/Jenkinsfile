@@ -4,9 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir('angular12-crud-application-demo') {
-                    sh 'docker run alpine ping google.com'
-
+                dir('angular12-crud-application-demo') { 
                     sh 'docker build -t khaoulaout/my-front-app:jma-2.0 .'
                 }
             }
