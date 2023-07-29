@@ -1,18 +1,16 @@
-FROM node:latest as node
+FROM node:latest as builder
 
-#create root folder
-RUN mkdir -p /frontend
-# access the root folder
-WORKDIR /frontend
+RUN mkdir -p /app
 
-#install dependencies
-COPY . /frontend/
+WORKDIR /app
+
+COPY . .
+
 RUN npm install
+RUN npm run build --prod
 
-#build application
-RUN npm run build
+CMD ["npm", "start"]
 
-#curl nginx
 FROM nginx:alpine
-
-COPY --from=node /frontend/dist/angular12-crud-application-demo /usr/share/nginx/html
+COPY src/nginx/etc/conf.d/default.conf /etc/nginx/conf/default.conf
+COPY --from=builder app/dist/angular12-crud-application-demo usr/share/nginx/html
