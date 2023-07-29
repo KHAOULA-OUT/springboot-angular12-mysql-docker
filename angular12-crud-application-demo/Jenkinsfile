@@ -4,7 +4,9 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t khaoulaout/my-front-app:jma-2.0 .'
+                dir('angular12-crud-application-demo') {
+                    sh 'docker build -t khaoulaout/my-front-app:jma-2.0 .'
+                }
             }
         }
 
