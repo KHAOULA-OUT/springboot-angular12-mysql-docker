@@ -17,6 +17,5 @@ COPY . .
 # Build the application
 RUN mvn package
 
-ADD springboot-crud-application-demo/target/crudapplication-0.0.1-SNAPSHOT.jar crudapplication-0.0.1-SNAPSHOT.jar
 # Set the entrypoint to run the Spring Boot application
 ENTRYPOINT ["java", "-jar", "crudapplication-0.0.1-SNAPSHOT.jar"]
