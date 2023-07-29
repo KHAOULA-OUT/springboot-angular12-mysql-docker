@@ -11,8 +11,8 @@ COPY . /frontend/
 # Install Angular CLI
 RUN npm install 
 
-# Build the application
-RUN ng build
+ #build application : as prod 
+ RUN npm run build 
 
 # Stage 2: Set up Nginx to serve the built application
 FROM nginx:alpine
