@@ -11,12 +11,13 @@ pipeline {
         }
 
         stage('Login to Docker Hub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                    sh "echo $PASS | docker login -u $USER --password-stdin"
-                }
-            }
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+            sh "echo \${PASS} | docker login -u \${USER} --password-stdin"
         }
+    }
+}
+
 
         stage('Push to Docker Hub') {
             steps {
