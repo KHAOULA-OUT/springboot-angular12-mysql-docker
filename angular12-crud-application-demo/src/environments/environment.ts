@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://backend-service:8080'
+  baseUrl: 'http://backend-service.first-namespace.svc.cluster.local:8080'
 };
 
 
