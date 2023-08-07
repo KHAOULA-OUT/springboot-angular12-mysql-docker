@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir('angular12-crud-application-demo') { 
-                    sh 'docker build -t khaoulaout/my-back-app:jma-3.0 .'
+                    sh 'docker build -t khaoulaout/my-back-app:jma-4.0 .'
                 }
             }
         }
@@ -20,14 +20,10 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                sh 'docker push khaoulaout/my-back-app:jma-3.0'
+                sh 'docker push khaoulaout/my-back-app:jma-4.0'
             }
         }
 
-        stage('Deploy') {
-            steps {
-                sh 'docker run -p 80:90 -d khaoulaout/my-back-app:jma-3.0'
-            }
-        }
+        
     }
 }
