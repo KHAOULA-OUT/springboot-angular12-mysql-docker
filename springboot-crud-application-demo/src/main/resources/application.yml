@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql-service/test
+    url: jdbc:mysql://mysql-service.first-namespace.svc.cluster.local/test
     username: testuser
     password: testuser@123
     hikari:
