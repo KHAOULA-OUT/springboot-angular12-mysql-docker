@@ -23,6 +23,12 @@ pipeline {
                 sh 'docker push khaoulaout/my-back-app:jma-4.0'
             }
         }
+            
+            stage('Deploy') {
+            steps {
+                sh "echo hello word"
+            }
+        }
 
         
     }
