@@ -16,21 +16,18 @@ pipeline {
                     sh "echo $PASS | docker login -u $USER --password-stdin"
                 }
             }
-
+        }
 
         stage('Push to Docker Hub') {
             steps {
                 sh 'docker push khaoulaout/my-back-app:jma-4.0'
             }
         }
-            
-            stage('Deploy') {
+
+        stage('Deploy') {
             steps {
-                sh "echo hello word"
+                sh "echo hello world"
             }
         }
-
-        
     }
-}
 }
