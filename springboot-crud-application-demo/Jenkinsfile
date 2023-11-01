@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir('angular12-crud-application-demo') { 
+                dir('springboot-crud-application-demo') { 
                     sh 'docker build -t khaoulaout/my-back-app:jma-4.0 .'
                 }
             }
