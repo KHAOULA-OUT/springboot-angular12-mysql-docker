@@ -1,7 +1,6 @@
 FROM node:12.14.1 as node
 
-RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf && \
-    echo "nameserver 8.8.4.4" >> /etc/resolv.conf
+RUN npm config set registry https://registry.npm.taobao.org/
 
 #create root folder
 RUN mkdir -p /frontend
