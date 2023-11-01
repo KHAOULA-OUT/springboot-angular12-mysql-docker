@@ -1,11 +1,16 @@
 pipeline {
     agent any
+    environment {
+        KUBECONFIG = credentials('kubeconfig') 
+        IMAGE_TAG = 'khaoulaout/my-front-app:jma-5.0' 
+        NAMESPACE = 'default' 
+    }
 
     stages {
         stage('Build') {
             steps {
                 dir('angular12-crud-application-demo') { 
-                    sh 'docker build -t khaoulaout/my-front-app:jma-4.0 .'
+                    sh 'docker build -t khaoulaout/my-front-app:jma-5.0 .'
                 }
             }
         }
@@ -20,13 +25,19 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                sh 'docker push khaoulaout/my-front-app:jma-4.0'
+                sh 'docker push khaoulaout/my-front-app:jma-5.0'
             }
         }
 
         stage('Deploy') {
             steps {
-                sh 'docker run -p 80:80 -d khaoulaout/my-front-app:jma-4.0'
+                script {
+                    // Configure kubectl with the provided kubeconfig
+                    withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                        sh "kubectl --kubeconfig=$KUBECONFIG apply -f angular12-crud-application-demo/deployment.yaml --record"
+                        //sh "kubectl --kubeconfig=$KUBECONFIG set image deployment/your-app-deployment your-app-container=$IMAGE_TAG"
+                    }
+                }
             }
         }
     }
