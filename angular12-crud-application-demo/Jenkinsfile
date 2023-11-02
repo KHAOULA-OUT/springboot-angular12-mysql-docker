@@ -34,7 +34,7 @@ pipeline {
                 script {
                     // Configure kubectl with the provided kubeconfig
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                        sh "kubectl --kubeconfig=$KUBECONFIG apply -f angular12-crud-application-demo/deployment.yaml --record"
+                        sh "kubectl --kubeconfig=$KUBECONFIG apply -f angular12-crud-application-demo/deployment.yml --record"
                         //sh "kubectl --kubeconfig=$KUBECONFIG set image deployment/your-app-deployment your-app-container=$IMAGE_TAG"
                     }
                 }
