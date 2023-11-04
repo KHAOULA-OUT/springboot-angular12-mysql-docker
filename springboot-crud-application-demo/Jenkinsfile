@@ -35,7 +35,7 @@ pipeline {
                 script {
                     // Configure kubectl with the provided kubeconfig
                     withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-                        sh "kubectl --kubeconfig=$KUBECONFIG apply -f springboot-angular12-mysql-docker/deployment.yml --record"
+                        sh "kubectl --kubeconfig=$KUBECONFIG apply -f springboot-crud-application-demo/deployment.yml --record"
                         //sh "kubectl --kubeconfig=$KUBECONFIG set image deployment/your-app-deployment your-app-container=$IMAGE_TAG"
                     }
                 }
