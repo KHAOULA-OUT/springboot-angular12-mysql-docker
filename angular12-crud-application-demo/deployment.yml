@@ -16,7 +16,7 @@ spec:
       #- name: dockerhub-secret
       containers:
       - name: front-container
-        image: khaoulaout/my-node-app:jma-2.0
+        image: khaoulaout/my-front-app:jma-5.0
         ports:
         - containerPort: 80
 ---
