@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    environment {
+        KUBECONFIG = credentials('kubeconfig') 
+        IMAGE_TAG = 'khaoulaout/my-front-app:jma-5.0' 
+        NAMESPACE = 'default' 
+    }
+
 
     stages {
         stage('Build') {
@@ -24,9 +30,15 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+         stage('Deploy') {
             steps {
-                sh "echo hello world"
+                script {
+                    // Configure kubectl with the provided kubeconfig
+                    withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+                        sh "kubectl --kubeconfig=$KUBECONFIG apply -f angular12-crud-application-demo/deployment.yml --record"
+                        //sh "kubectl --kubeconfig=$KUBECONFIG set image deployment/your-app-deployment your-app-container=$IMAGE_TAG"
+                    }
+                }
             }
         }
     }
